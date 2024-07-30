@@ -110,7 +110,7 @@ StringResponse HandleRequest(StringRequest &&req) {
                              "Hello, "s.append(req.target().begin() + 1));
     }
 
-    return text_response(http::status::method_not_allowed, ""sv);
+    return text_response(http::status::method_not_allowed, "Invalid method"sv);
 }
 
 int main() {
