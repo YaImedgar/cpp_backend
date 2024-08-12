@@ -113,6 +113,7 @@ public:
         try {
             Unlock();
         } catch (...) {
+            std::cerr << "Got exception in ~GasCookerLock()" << std::endl;
         }
     }
 
