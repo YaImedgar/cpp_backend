@@ -6,6 +6,8 @@
 
 namespace json_loader {
 
-model::Game LoadGame(const std::filesystem::path& json_path);
+model::Game LoadGame(const std::filesystem::path &json_path);
+std::string GetAllMapsInfoAsJsonString(const model::Game &game);
+std::string GetMapInfoAsJsonString(const model::Map &map);
 
-}  // namespace json_loader
+} // namespace json_loader
