@@ -1,8 +1,8 @@
 #pragma once
 #include <chrono>
-#include <format>
 #include <functional>
 #include <optional>
+#include <sstream>
 #include <stdexcept>
 #include <string_view>
 
@@ -19,9 +19,9 @@ class HotDog {
     void CheckInvariant(Clock::duration duration, Clock::duration min,
                         Clock::duration max, std::string_view name) {
         if (duration < min || duration > max) {
-            throw std::invalid_argument(std::format(
-                "Invalid {} cook duration. Duration: {}, min={}, max={}", name,
-                duration, min, max));
+            std::ostringstream oss;
+            oss << "Invalid " << name << " cook duration" << std::endl;
+            throw std::invalid_argument(oss.str());
         }
     }
 
