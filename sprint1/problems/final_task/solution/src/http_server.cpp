@@ -41,6 +41,10 @@ void SessionBase::OnRead(beast::error_code ec,
 void SessionBase::Close() {
     beast::error_code ec;
     stream_.socket().shutdown(tcp::socket::shutdown_send, ec);
+
+    if (ec) {
+        return ReportError(ec, "read"sv);
+    }
 }
 
 void SessionBase::OnWrite(bool close, beast::error_code ec,

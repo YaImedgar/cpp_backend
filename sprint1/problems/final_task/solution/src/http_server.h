@@ -13,15 +13,11 @@
 
 namespace http_server {
 
-namespace {
-
 namespace net = boost::asio;
 using tcp = net::ip::tcp;
 namespace beast = boost::beast;
 namespace http = beast::http;
 using namespace std::literals;
-
-} // namespace
 
 void ReportError(beast::error_code ec, std::string_view what);
 
