@@ -1,8 +1,10 @@
 #pragma once
 
+#include "errors.hpp"
+
 #include <string_view>
 
-#include "sdk.h"
+#include "sdk.hpp"
 // boost.beast будет использовать std::string_view вместо boost::string_view
 #define BOOST_BEAST_USE_STD_STRING_VIEW
 //
@@ -18,8 +20,6 @@ using tcp = net::ip::tcp;
 namespace beast = boost::beast;
 namespace http = beast::http;
 using namespace std::literals;
-
-void ReportError(beast::error_code ec, std::string_view what);
 
 class SessionBase {
   public:
@@ -158,7 +158,7 @@ class Listener : public std::enable_shared_from_this<Listener<RequestHandler>> {
         using namespace std::literals;
 
         if (ec) {
-            return ReportError(ec, "accept"sv);
+            return error::Report(ec, "accept"sv);
         }
 
         // Асинхронно обрабатываем сессию

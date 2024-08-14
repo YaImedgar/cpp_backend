@@ -1,4 +1,5 @@
-#include "json_loader.h"
+#include "json_loader.hpp"
+#include "model.hpp"
 
 #include <fstream>
 #include <iostream>

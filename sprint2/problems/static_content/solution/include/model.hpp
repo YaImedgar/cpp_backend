@@ -1,14 +1,13 @@
 #pragma once
+
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-#include "tagged.h"
+#include "model_fwd.hpp"
+#include "tagged.hpp"
 
 namespace model {
-
-using Dimension = int;
-using Coord = Dimension;
 
 struct Point {
     Coord x, y;

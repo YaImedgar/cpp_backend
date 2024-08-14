@@ -1,13 +1,11 @@
-#include "http_server.h"
+#include "http_server.hpp"
+#include "errors.hpp"
+
 #include <iostream>
 
 namespace http_server {
 
 using namespace std::string_view_literals;
-
-void ReportError(beast::error_code ec, std::string_view what) {
-    std::cerr << what << ": "sv << ec.message() << std::endl;
-}
 
 void SessionBase::Run() {
     net::dispatch(
@@ -33,7 +31,7 @@ void SessionBase::OnRead(beast::error_code ec,
         return Close();
     }
     if (ec) {
-        return ReportError(ec, "read"sv);
+        return error::Report(ec, "read"sv);
     }
     HandleRequest(std::move(request_));
 }
@@ -43,14 +41,14 @@ void SessionBase::Close() {
     stream_.socket().shutdown(tcp::socket::shutdown_send, ec);
 
     if (ec) {
-        return ReportError(ec, "read"sv);
+        return error::Report(ec, "read"sv);
     }
 }
 
 void SessionBase::OnWrite(bool close, beast::error_code ec,
                           [[maybe_unused]] std::size_t bytes_written) {
     if (ec) {
-        return ReportError(ec, "write"sv);
+        return error::Report(ec, "write"sv);
     }
 
     if (close) {

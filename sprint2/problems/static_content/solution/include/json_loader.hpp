@@ -2,7 +2,7 @@
 
 #include <filesystem>
 
-#include "model.h"
+#include "model_fwd.hpp"
 
 namespace json_loader {
 
